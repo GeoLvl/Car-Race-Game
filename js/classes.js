@@ -18,6 +18,17 @@ class Game {
         obstacle.moveDown();
         obstacle.draw();
       });
+      // collision detection
+      this.obstaclesArr.forEach((obstacle) => {
+        if (obstacle.y === 100) {
+          if (
+            this.car.x < obstacle.x + obstacle.width &&
+            this.car.x + this.car.width > obstacle.x
+          ) {
+            alert("game over");
+          }
+        }
+      });
 
       // create new obstacles
       if (this.currentTime % 8 === 0) {
@@ -93,11 +104,11 @@ class Obstacle extends Thing {
     super();
     this.x = 50;
     this.y = 0;
-    this.width = 15;
+    this.width = 10;
     this.height = 10;
     this.className = "obstacle";
   }
   moveDown() {
-    this.y = this.y + 8;
+    this.y = this.y + 10;
   }
 }
