@@ -26,18 +26,21 @@ class Game {
             this.car.x + this.car.width > obstacle.x
           ) {
             alert("game over");
+          } else if (obstacle.y > 100) {
+            obstacle.remove(); //remove from dom
+            this.obstaclesArr.shift(); // remove from array
           }
         }
       });
 
       // create new obstacles
-      if (this.currentTime % 8 === 0) {
+      if (this.currentTime % 10 === 0) {
         const newObstacle = new Obstacle();
         newObstacle.create();
         newObstacle.draw();
         this.obstaclesArr.push(newObstacle);
       }
-    }, 200);
+    }, 500);
   }
   addEventListeners() {
     document.addEventListener("keydown", (event) => {
@@ -70,6 +73,10 @@ class Thing {
     //   append to dom
     const gameElm = document.getElementById("game");
     gameElm.appendChild(this.domElm);
+  }
+  remove() {
+    const gameElm = document.getElementById("game");
+    gameElm.removeChild(this.domElm);
   }
   draw() {
     this.domElm.style.width = this.width + "%";
@@ -109,6 +116,6 @@ class Obstacle extends Thing {
     this.className = "obstacle";
   }
   moveDown() {
-    this.y = this.y + 10;
+    this.y = this.y + 5;
   }
 }
