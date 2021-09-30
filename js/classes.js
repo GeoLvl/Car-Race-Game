@@ -2,11 +2,31 @@ class Game {
   constructor() {
     this.currentTime = 0;
     this.car = null;
+    this.obstaclesArr = [];
   }
   startGame() {
     this.car = new Car();
     this.car.create();
     this.addEventListeners();
+
+    setInterval(() => {
+      // update timer
+      this.currentTime++;
+
+      // update obstacle position
+      this.obstaclesArr.forEach((obstacle) => {
+        obstacle.moveDown();
+        obstacle.draw();
+      });
+
+      // create new obstacles
+      if (this.currentTime % 8 === 0) {
+        const newObstacle = new Obstacle();
+        newObstacle.create();
+        newObstacle.draw();
+        this.obstaclesArr.push(newObstacle);
+      }
+    }, 200);
   }
   addEventListeners() {
     document.addEventListener("keydown", (event) => {
@@ -23,27 +43,19 @@ class Game {
   }
 }
 
-class Car {
+class Thing {
   constructor() {
-    this.x = 50;
-    this.y = 100;
-    this.width = 10;
-    this.height = 15;
+    // this.className = className;
+    // this.x = 50;
+    // this.y = 100;
+    // this.width = 10;
+    // this.height = 15;
     this.domElm = null;
-  }
-
-  moveLeft() {
-    // console.log("move left");
-    this.x--;
-  }
-  moveRight() {
-    // console.log("move right");
-    this.x++;
   }
   create() {
     //   create element
     this.domElm = document.createElement("div");
-    this.domElm.className = "car";
+    this.domElm.className = this.className;
     //   append to dom
     const gameElm = document.getElementById("game");
     gameElm.appendChild(this.domElm);
@@ -54,5 +66,38 @@ class Car {
     this.domElm.style.left = this.x + "%";
     this.domElm.style.top = this.y + "%";
     // this.domElm.innerHTML = "Car";
+  }
+}
+
+class Car extends Thing {
+  constructor() {
+    super();
+    this.x = 50;
+    this.y = 100;
+    this.width = 10;
+    this.height = 15;
+    this.className = "car";
+  }
+  moveLeft() {
+    // console.log("move left");
+    this.x--;
+  }
+  moveRight() {
+    // console.log("move right");
+    this.x++;
+  }
+}
+
+class Obstacle extends Thing {
+  constructor() {
+    super();
+    this.x = 50;
+    this.y = 0;
+    this.width = 15;
+    this.height = 10;
+    this.className = "obstacle";
+  }
+  moveDown() {
+    this.y = this.y + 8;
   }
 }

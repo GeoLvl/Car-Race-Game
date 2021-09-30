@@ -21,3 +21,8 @@ h1 {
   position: absolute;
   background-color: brown;
 }
+
+.obstacle {
+  position: absolute;
+  background-color: green;
+}
