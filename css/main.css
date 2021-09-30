@@ -1,0 +1,23 @@
+body {
+  text-align-last: center;
+  background-color: #16161d;
+}
+
+h1 {
+  color: brown;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#game {
+  position: relative;
+  width: 60vw;
+  height: 90vh;
+  outline: 2px solid black;
+  margin: 0 auto;
+  background-color: rgb(230, 225, 218);
+}
+
+.car {
+  position: absolute;
+  background-color: brown;
+}
