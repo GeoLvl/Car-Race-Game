@@ -25,5 +25,5 @@ h1 {
 .obstacle {
   position: absolute;
   background-color: green;
-  transition: all 1s linear;
+  transition: all 0.1s linear;
 }

@@ -34,13 +34,13 @@ class Game {
       });
 
       // create new obstacles
-      if (this.currentTime % 10 === 0) {
+      if (this.currentTime % 6 === 0) {
         const newObstacle = new Obstacle();
         newObstacle.create();
         newObstacle.draw();
         this.obstaclesArr.push(newObstacle);
       }
-    }, 500);
+    }, 100);
   }
   addEventListeners() {
     document.addEventListener("keydown", (event) => {
@@ -98,21 +98,21 @@ class Car extends Thing {
   }
   moveLeft() {
     // console.log("move left");
-    this.x--;
+    this.x -= 2;
   }
   moveRight() {
     // console.log("move right");
-    this.x++;
+    this.x += 2;
   }
 }
 
 class Obstacle extends Thing {
   constructor() {
     super();
-    this.x = 50;
+    this.width = Math.floor(Math.random() * (30 - 10 + 1) + 10);
+    this.height = 5;
+    this.x = Math.floor(Math.random() * (100 - this.width + 1));
     this.y = 0;
-    this.width = 10;
-    this.height = 10;
     this.className = "obstacle";
   }
   moveDown() {
